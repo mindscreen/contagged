@@ -83,7 +83,12 @@ class tx_contagged_model_terms implements \TYPO3\CMS\Core\SingletonInterface {
 				$this->terms = array_merge($this->terms, $this->fetchTermsFromSource($dataSource, $storagePidsArray));
 			}
 		}
-		return $this->terms;
+		$terms = $this->terms;
+		foreach ($terms as &$term) {
+			$term['term_main'] = htmlspecialchars($term['term_main']);
+			$term['desc_short'] = htmlspecialchars($term['desc_short']);
+		}
+		return $terms;
 	}
 
 	function findAllTermsToListOnPage($pid = NULL) {
