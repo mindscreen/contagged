@@ -3,6 +3,13 @@ if (!defined('TYPO3_MODE')) {
 	die ('Access denied.');
 }
 
+// Autoloading workaround until contagged classes have been normalized and autoloading is possible via composer
+$extensionPath = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('contagged');
+require_once($extensionPath . 'class.tx_contagged.php');
+require_once($extensionPath . 'model/class.tx_contagged_model_mapper.php');
+require_once($extensionPath . 'model/class.tx_contagged_model_terms.php');
+
+
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_contagged_terms');
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToInsertRecords('tx_contagged_terms');
 
